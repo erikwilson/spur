@@ -11,7 +11,6 @@ import (
 	"text/template"
 
 	"github.com/cpuguy83/go-md2man/v2/md2man"
-	"github.com/rancher/spur/flag"
 	"github.com/rancher/spur/generic"
 )
 
@@ -122,7 +121,7 @@ func prepareFlags(
 			}
 		}
 		modifiedArg += closer
-		if v, ok := getFlagValue(f); ok && !flag.IsBoolValue(v) {
+		if v, ok := getFlagValue(f); ok && !generic.IsBoolElem(v) {
 			modifiedArg += fmt.Sprintf("=%s", value)
 		}
 
@@ -143,7 +142,7 @@ func flagDetails(f Flag) string {
 	value, _ := getFlagValue(f)
 	valStr := ""
 
-	if !flag.IsBoolValue(value) {
+	if !generic.IsBoolElem(value) {
 		if v, ok := value.(Generic); ok {
 			valStr = v.String()
 		} else if s, ok := generic.ToString(value); ok {

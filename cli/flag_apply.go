@@ -1,14 +1,17 @@
 package cli
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"strings"
+	"sync"
 	"syscall"
 
-	"github.com/rancher/spur/flag"
 	"github.com/rancher/spur/generic"
 )
+
+var loadedValues sync.Map
 
 // Apply will attempt to apply generic flag values to a flagset
 func Apply(f Flag, typ string, set *flag.FlagSet) error {
@@ -30,7 +33,8 @@ func Apply(f Flag, typ string, set *flag.FlagSet) error {
 	if value == nil || generic.ValueOfPtr(value) == nil {
 		value = generic.New(destination)
 	}
-	wasSet := false
+
+	isLoaded := false
 	// load flags from environment or file
 	if val, ok := flagFromEnvOrFile(envVars, filePath); ok {
 		newValue := generic.New(value)
@@ -38,21 +42,20 @@ func Apply(f Flag, typ string, set *flag.FlagSet) error {
 			return fmt.Errorf("could not parse %q as %s value for flag %s: %s", val, typ, name, err)
 		}
 		value = newValue
-		wasSet = true
+		isLoaded = true
 	}
 	// copy value to destination
 	generic.Set(destination, generic.ValueOfPtr(value))
 	dest, ok := destination.(flag.Value)
 	if !ok {
-		dest = flag.NewGenericValue(destination)
+		dest = NewGenericValue(destination)
 	}
 	// for all of the names set the flag variable
 	for _, name := range FlagNames(f) {
+		if isLoaded {
+			loadedValues.Store(dest, true)
+		}
 		set.Var(dest, name, usage)
-	}
-	// if value is not default mark as needs visit
-	if wasSet {
-		set.NeedsVisit(name)
 	}
 	return nil
 }

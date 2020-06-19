@@ -1,9 +1,8 @@
 package cli
 
 import (
+	"flag"
 	"time"
-
-	"github.com/rancher/spur/flag"
 )
 
 var _ = time.Time{}
@@ -29,8 +28,8 @@ type BoolFlag struct {
 }
 
 // Apply populates the flag given the flag set and environment
-func (f *BoolFlag) Apply(set *flag.FlagSet) error {
-	return Apply(f, "bool", set)
+func (f BoolFlag) Apply(set *flag.FlagSet) error {
+	return Apply(&f, "bool", set)
 }
 
 // Bool looks up the value of a local BoolFlag, returns

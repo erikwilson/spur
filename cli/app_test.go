@@ -3,6 +3,7 @@ package cli
 import (
 	"bytes"
 	"errors"
+	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -10,8 +11,6 @@ import (
 	"reflect"
 	"strings"
 	"testing"
-
-	"github.com/rancher/spur/flag"
 )
 
 var (

@@ -3,12 +3,11 @@ package cli
 import (
 	"bytes"
 	"errors"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"strings"
 	"testing"
-
-	"github.com/rancher/spur/flag"
 )
 
 func TestCommandFlagParsing(t *testing.T) {

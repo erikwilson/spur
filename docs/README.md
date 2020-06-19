@@ -1501,7 +1501,7 @@ import (
   "time"
 
   "github.com/rancher/spur/cli"
-  "github.com/rancher/spur/flag"
+  "flag"
 )
 
 func init() {

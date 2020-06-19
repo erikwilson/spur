@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -13,7 +14,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rancher/spur/flag"
 	"github.com/rancher/spur/generic"
 )
 
@@ -1711,8 +1711,8 @@ func TestParseMultiBoolT(t *testing.T) {
 
 type Parser [2]string
 
-func (p *Parser) Set(value interface{}) error {
-	parts := strings.Split(value.(string), ",")
+func (p *Parser) Set(value string) error {
+	parts := strings.Split(value, ",")
 	if len(parts) != 2 {
 		return fmt.Errorf("invalid format")
 	}

@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"github.com/rancher/spur/flag"
+	"flag"
 )
 
 // Generic is a type alias for flag.Value
@@ -25,8 +25,8 @@ type GenericFlag struct {
 }
 
 // Apply populates the flag given the flag set and environment
-func (f *GenericFlag) Apply(set *flag.FlagSet) error {
-	return Apply(f, "generic", set)
+func (f GenericFlag) Apply(set *flag.FlagSet) error {
+	return Apply(&f, "generic", set)
 }
 
 // Generic looks up the value of a local GenericFlag, returns

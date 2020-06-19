@@ -7,8 +7,9 @@ import (
 	"testing"
 	"time"
 
+	"flag"
+
 	"github.com/rancher/spur/cli"
-	"github.com/rancher/spur/flag"
 )
 
 type testApplyInputSource struct {
@@ -293,8 +294,8 @@ func runTest(t *testing.T, test testApplyInputSource) *cli.Context {
 
 type Parser [2]string
 
-func (p *Parser) Set(value interface{}) error {
-	parts := strings.Split(value.(string), ",")
+func (p *Parser) Set(value string) error {
+	parts := strings.Split(value, ",")
 	if len(parts) != 2 {
 		return fmt.Errorf("invalid format")
 	}

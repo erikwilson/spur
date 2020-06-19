@@ -7,7 +7,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/rancher/spur/flag"
+	"github.com/rancher/spur/generic"
 )
 
 // ToFishCompletion creates a fish completion string for the `*App`
@@ -139,7 +139,7 @@ func (a *App) prepareFishFlags(flags []Flag, previousCommands []string) []string
 			}
 		}
 
-		if v, ok := getFlagValue(f); ok && !flag.IsBoolValue(v) {
+		if v, ok := getFlagValue(f); ok && !generic.IsBoolElem(v) {
 			completion.WriteString(" -r")
 		}
 

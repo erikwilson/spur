@@ -1,9 +1,10 @@
 package cli
 
 import (
+	"flag"
 	"fmt"
 
-	"github.com/rancher/spur/flag"
+	"github.com/rancher/spur/generic"
 )
 
 // InputSourceContext is an interface used to allow
@@ -32,8 +33,9 @@ func ApplyInputSourceValue(f Flag, context *Context, isc InputSourceContext) err
 			if v, ok := value.(flag.Value); ok {
 				value = v.String()
 			}
+
 			// sets the new value from some source
-			if err := context.Set(name, value); err != nil {
+			if err := context.Set(name, generic.Stringify(value)); err != nil {
 				return fmt.Errorf("unable to apply input source '%s': %s", isc.Source(), err)
 			}
 		}

@@ -1,9 +1,8 @@
 package cli
 
 import (
+	"flag"
 	"time"
-
-	"github.com/rancher/spur/flag"
 )
 
 var _ = time.Time{}
@@ -29,8 +28,8 @@ type Float64SliceFlag struct {
 }
 
 // Apply populates the flag given the flag set and environment
-func (f *Float64SliceFlag) Apply(set *flag.FlagSet) error {
-	return Apply(f, "float64 slice", set)
+func (f Float64SliceFlag) Apply(set *flag.FlagSet) error {
+	return Apply(&f, "float64 slice", set)
 }
 
 // Float64Slice looks up the value of a local Float64SliceFlag, returns

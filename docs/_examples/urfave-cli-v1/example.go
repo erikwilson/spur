@@ -21,10 +21,10 @@ func main() {
 			EnvVar: "SLICE",
 			Value:  &defaultValue,
 		}),
-		altsrc.NewStringFlag(cli.StringFlag{
+		cli.StringFlag{
 			Name:  "load",
 			Value: "conf.json",
-		}),
+		},
 	}
 	(&cli.App{
 		EnableBashCompletion: true,

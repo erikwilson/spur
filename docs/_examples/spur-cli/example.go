@@ -29,14 +29,14 @@ func main() {
 		},
 		Before: cli.InitAllInputSource(altsrc.NewConfigFromFlag("load")),
 		Flags: []cli.Flag{
-			&cli.StringSliceFlag{
+			cli.StringSliceFlag{
 				Name:        "test-string-slice",
 				Aliases:     []string{"s"},
 				EnvVars:     []string{"SLICE"},
 				Value:       defaultValue,
 				Destination: destination,
 			},
-			&cli.StringFlag{
+			cli.StringFlag{
 				Name:  "load",
 				Value: "conf.json",
 			},

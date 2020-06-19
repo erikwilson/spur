@@ -95,6 +95,10 @@ func ElemTypeOf(value interface{}) reflect.Type {
 	return typ
 }
 
+func IsBoolElem(value interface{}) bool {
+	return ElemTypeOf(value).Kind() == reflect.Bool
+}
+
 // New returns a new reflection with TypeOf value
 func New(value interface{}) interface{} {
 	return reflect.New(TypeOf(value)).Interface()

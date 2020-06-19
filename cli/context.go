@@ -2,11 +2,10 @@ package cli
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"reflect"
 	"strings"
-
-	"github.com/rancher/spur/flag"
 )
 
 // Context is a type that is passed through to
@@ -48,7 +47,7 @@ func (c *Context) NumFlags() int {
 }
 
 // Set sets a context flag to a value.
-func (c *Context) Set(name string, value interface{}) error {
+func (c *Context) Set(name string, value string) error {
 	return c.flagSet.Set(name, value)
 }
 
@@ -62,6 +61,23 @@ func (c *Context) IsSet(name string) bool {
 			}
 		})
 		if isSet {
+			return true
+		}
+	}
+	return c.isLoaded(name)
+}
+
+func (c *Context) isLoaded(name string) bool {
+	if fs := lookupFlagSet(name, c); fs != nil {
+		isLoaded := false
+		fs.VisitAll(func(f *flag.Flag) {
+			if f.Name == name {
+				if v, ok := loadedValues.Load(f.Value); ok && v == true {
+					isLoaded = true
+				}
+			}
+		})
+		if isLoaded {
 			return true
 		}
 	}
@@ -125,6 +141,9 @@ func (c *Context) Lookup(name string, defaultVal interface{}) interface{} {
 	if result == nil {
 		return defaultVal
 	}
+	// if v, ok := result.(hasOrigin); ok {
+	// 	result = v.getOrigin()
+	// }
 	// if we don't have a default value assume they want they flag.Value
 	if defaultVal != nil {
 		result = result.(flag.Getter).Get()

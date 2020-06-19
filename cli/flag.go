@@ -8,7 +8,8 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/rancher/spur/flag"
+	"flag"
+
 	"github.com/rancher/spur/generic"
 )
 

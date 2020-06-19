@@ -1,9 +1,8 @@
 package cli
 
 import (
+	"flag"
 	"time"
-
-	"github.com/rancher/spur/flag"
 )
 
 var _ = time.Time{}
@@ -29,8 +28,8 @@ type DurationFlag struct {
 }
 
 // Apply populates the flag given the flag set and environment
-func (f *DurationFlag) Apply(set *flag.FlagSet) error {
-	return Apply(f, "duration", set)
+func (f DurationFlag) Apply(set *flag.FlagSet) error {
+	return Apply(&f, "duration", set)
 }
 
 // Duration looks up the value of a local DurationFlag, returns

@@ -1,9 +1,8 @@
 package cli
 
 import (
+	"flag"
 	"time"
-
-	"github.com/rancher/spur/flag"
 )
 
 var _ = time.Time{}
@@ -29,8 +28,8 @@ type Title__Flag struct {
 }
 
 // Apply populates the flag given the flag set and environment
-func (f *Title__Flag) Apply(set *flag.FlagSet) error {
-	return Apply(f, "LongName__", set)
+func (f Title__Flag) Apply(set *flag.FlagSet) error {
+	return Apply(&f, "LongName__", set)
 }
 
 // Title__ looks up the value of a local Title__Flag, returns

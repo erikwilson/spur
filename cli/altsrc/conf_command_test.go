@@ -1,12 +1,12 @@
 package altsrc
 
 import (
+	"flag"
 	"io/ioutil"
 	"os"
 	"testing"
 
 	"github.com/rancher/spur/cli"
-	"github.com/rancher/spur/flag"
 )
 
 func TestConfigFileTest(t *testing.T) {

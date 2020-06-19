@@ -1,11 +1,10 @@
 package cli
 
 import (
+	"flag"
 	"fmt"
 	"sort"
 	"strings"
-
-	"github.com/rancher/spur/flag"
 )
 
 // Command is a subcommand for a cli.App.

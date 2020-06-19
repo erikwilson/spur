@@ -3,7 +3,7 @@ package cli
 import (
 	"strings"
 
-	"github.com/rancher/spur/flag"
+	"flag"
 )
 
 type iterativeParser interface {

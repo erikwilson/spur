@@ -1,9 +1,8 @@
 package cli
 
 import (
+	"flag"
 	"time"
-
-	"github.com/rancher/spur/flag"
 )
 
 var _ = time.Time{}
@@ -29,8 +28,8 @@ type IntFlag struct {
 }
 
 // Apply populates the flag given the flag set and environment
-func (f *IntFlag) Apply(set *flag.FlagSet) error {
-	return Apply(f, "int", set)
+func (f IntFlag) Apply(set *flag.FlagSet) error {
+	return Apply(&f, "int", set)
 }
 
 // Int looks up the value of a local IntFlag, returns

@@ -2,14 +2,13 @@ package cli
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
 	"sort"
 	"time"
-
-	"github.com/rancher/spur/flag"
 )
 
 // App is the main structure of a cli application. It is recommended that

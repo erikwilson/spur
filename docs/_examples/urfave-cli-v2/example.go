@@ -25,10 +25,10 @@ func main() {
 			Value:       defaultValue,
 			Destination: destination,
 		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "load",
 			Value: "conf.json",
-		}),
+		},
 	}
 	(&cli.App{
 		EnableBashCompletion: true,
